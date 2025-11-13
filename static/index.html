@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analisador de Imagem de IA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="icon" type="image/png" href="./images/logo.png">
+</head>
+<body>
+    <div class="menu-container">
+        <input type="checkbox" id="menu-toggle" class="menu-toggle" />
+            <label for="menu-toggle" class="hamburger-icon">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </label>
+
+            <nav class="menu-items">
+                <a href="#home" class="menu-button">Home</a>
+                <a href="#relatorio" class="menu-button">Relatório</a>
+                <a href="#sobre" class="menu-button">Sobre</a>
+            </nav>
+    </div>
+
+    <div class="theme-switch" id="theme-switch">
+        <i class="fas fa-moon"></i>
+    </div>
+
+    <div class="page-container">
+        <main id="home" class="home-container">
+            <div class="home-content animate-in">
+                <div class="title-section">
+                    <h1>Analisador de Desmatamento com I.A</h1>
+                    <p>Faça upload de uma imagem .tiff para análise detalhada</p>
+                </div>
+
+                <div class="upload-section">
+                    <form id="upload-form" class="upload-form" aria-label="Formulário de upload de imagem" novalidate>
+                        <input type="file" id="Selecao-arquivo" name="imagem" aria-label="Selecione imagem TIFF" accept="image/tiff, .tif" required>
+
+                        <div class="button-group">
+                            <label for="Selecao-arquivo" class="botao-padrao" role="button" tabindex="0">
+                                <i class="fas fa-upload" aria-hidden="true"></i>
+                                <span class="sr-only">Selecionar Imagem</span>
+                                <span>Selecionar Imagem</span>
+                            </label>
+
+                            <button id="botao-analisar" class="botao-padrao primario" type="button" disabled aria-disabled="true">
+                                <i class="fas fa-search" aria-hidden="true"></i>
+                                <span>Analisar Imagem</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="analysis-section">
+                    <div class="preview-card card">
+                        <h3><i class="fas fa-image"></i> Visualização Processada</h3>
+                        <div class="preview-wrapper">
+                            <img id="imagem-processada" class="processed-image" alt="Imagem processada com classificação de áreas" style="display: none;">
+                            <div class="image-placeholder">
+                                <i class="fas fa-landscape"></i>
+                                <p>Selecione e analise uma imagem para visualização</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="area-resultado" class="result-card card" role="status" aria-live="polite">
+                        <h3><i class="fas fa-chart-pie" aria-hidden="true"></i> <span>Resultados</span></h3>
+                        <div class="progress-wrapper">
+                            <div class="progress-bar" aria-hidden="true">
+                                <div class="progress" style="width:0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        </div>
+
+        
+
+        <!-- Seção: Relatório -->
+        <section id="relatorio" class="section-content">
+            <h2>Relatório de Análises</h2>
+            <div class="content-wrapper">
+                <div class="report-filters">
+                    <div class="filter-group">
+                        <label for="data-inicial">Data Inicial:</label>
+                        <input type="date" id="data-inicial" class="date">
+                    </div>
+                    <div class="filter-group">
+                        <label for="data-final">Data Final:</label>
+                        <input type="date" id="data-final" class="date">
+                    </div>
+                    <button class="botao-filtrar">
+                        <i class="fas fa-filter"></i> Filtrar
+                    </button>
+                </div>
+
+                <div class="report-summary">
+                    <div class="summary-card card">
+                        <i class="fas fa-tree"></i>
+                        <h4>Total de Análises</h4>
+                        <p id="total-analises">0</p>
+                    </div>
+                    <div class="summary-card card">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h4>Média de Desmatamento</h4>
+                        <p id="media-desmatamento">0%</p>
+                    </div>
+                    <div class="summary-card card">
+                        <i class="fas fa-leaf"></i>
+                        <h4>Média de Vegetação</h4>
+                        <p id="media-vegetacao">0%</p>
+                    </div>
+                </div>
+
+                <div id="analises-anteriores" class="report-list card">
+                    <h3>Histórico de Análises</h3>
+                    <div class="no-data">
+                        <i class="fas fa-inbox"></i>
+                        <p>Nenhuma análise realizada ainda.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contato removido -->
+
+        <!-- Seção: Sobre (integrada das páginas internas) -->
+        <section id="sobre" class="section-content">
+            <h2>Sobre o Projeto</h2>
+            <div class="content-wrapper">
+                <p>O Analisador de Desmatamento com I.A é uma ferramenta que utiliza processamento de imagens TIFF e algoritmos para identificar e filtrar água, solo exposto e diferentes níveis de vegetação.<br></br></p>
+
+                <div class="content-grid">
+                    <div class="overview-card card">
+                        <h3><i class="fas fa-info-circle"></i> Visão Geral</h3>
+                        <p>Análise precisa de imagens TIFF para monitoramento ambiental e detecção de desmatamento.</p>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Processamento local ou em nuvem</li>
+                            <li><i class="fas fa-check"></i> Classificação de cobertura por NDVI</li>
+                            <li><i class="fas fa-check"></i> Relatórios e histórico de análises</li>
+                        </ul>
+                    </div>
+
+                    <div class="technology-card card">
+                        <h3><i class="fas fa-microchip"></i> Tecnologia</h3>
+                        <p>Rasterio, NumPy e processamento baseado em Python para gerar métricas e percentuais.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Analisador de Desmatamento com IA</h3>
+                <p>Desenvolvido com tecnologia de ponta para preservação ambiental</p>
+            </div>
+            <div class="footer-section">
+                <h3>Links Rápidos</h3>
+                <a href="#home">Home</a>
+                <a href="#sobre">Sobre</a>
+                <a href="#relatorio">Relatório</a>
+            </div>
+            <div class="footer-section">
+                <h3>Redes Sociais</h3>
+                <div class="social-links">
+                    <a href="https://github.com/Attashiie/APS_I.A_FILTER"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Analisador de Desmatamento com IA. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+    </div>
+
+    <script src="/static/js/app.js" defer></script>
+
+</body>
+</html>
